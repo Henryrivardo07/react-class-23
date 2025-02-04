@@ -1,22 +1,28 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Digunakan untuk navigasi antar halaman
-import { useCart } from "../../Context/cartContext"; // Mengakses konteks cart untuk mendapatkan state dan aksi
-import CheckoutForm from "@/components/CheckoutForm/CheckoutForm"; // Komponen form checkout
-import styles from "./Checkout.module.scss"; // Import styling SCSS untuk halaman checkout
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Digunakan untuk navigasi antar halaman
+import { useCart } from '../../Context/cartContext'; // Mengakses konteks cart untuk mendapatkan state dan aksi
+import CheckoutForm from '@/components/CheckoutForm/CheckoutForm'; // Komponen form checkout
+import styles from './Checkout.module.scss'; // Import styling SCSS untuk halaman checkout
 
 export const Checkout: React.FC = () => {
   // Mengambil data dari cartContext seperti cart items dan fungsi manipulasi cart
-  const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
-  
+  const {
+    cart,
+    removeFromCart,
+    clearCart,
+    increaseQuantity,
+    decreaseQuantity,
+  } = useCart();
+
   // Untuk navigasi ke halaman lain
   const navigate = useNavigate();
-  
+
   // State untuk menampilkan atau menyembunyikan form checkout
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
 
   // Redirect jika cart kosong
   if (cart.length === 0) {
-    navigate("/"); // Mengarahkan pengguna ke halaman utama jika cart kosong
+    navigate('/'); // Mengarahkan pengguna ke halaman utama jika cart kosong
   }
 
   // Fungsi untuk menampilkan form checkout
@@ -26,9 +32,9 @@ export const Checkout: React.FC = () => {
 
   // Fungsi untuk menangani pengiriman form checkout
   const handleSubmit = () => {
-    alert("Checkout successful! Thank you for your purchase.");
+    alert('Checkout successful! Thank you for your purchase.');
     clearCart(); // Mengosongkan keranjang setelah checkout
-    navigate("/"); // Mengarahkan pengguna kembali ke halaman utama setelah checkout
+    navigate('/'); // Mengarahkan pengguna kembali ke halaman utama setelah checkout
   };
 
   return (
@@ -45,18 +51,34 @@ export const Checkout: React.FC = () => {
           <div className={styles.cartItems}>
             {cart.map((item) => (
               <div key={item.id} className={styles.cartItem}>
-                <img src={item.image} alt={item.title} className={styles.itemImage} />
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className={styles.itemImage}
+                />
                 <div className={styles.itemDetails}>
                   <p className={styles.itemTitle}>{item.title}</p>
                   {/* Menampilkan harga item dengan format Rp */}
-                  <p className={styles.itemPrice}>Rp {parseFloat(item.price).toLocaleString()}</p>
+                  <p className={styles.itemPrice}>
+                    Rp {parseFloat(item.price).toLocaleString()}
+                  </p>
                   <div className={styles.quantityControls}>
                     {/* Tombol untuk mengurangi jumlah */}
-                    <button onClick={() => decreaseQuantity(item.id)} className={styles.quantityButton}>-</button>
+                    <button
+                      onClick={() => decreaseQuantity(item.id)}
+                      className={styles.quantityButton}
+                    >
+                      -
+                    </button>
                     {/* Menampilkan jumlah item dalam cart */}
                     <span className={styles.quantity}>{item.quantity}</span>
                     {/* Tombol untuk menambah jumlah */}
-                    <button onClick={() => increaseQuantity(item.id)} className={styles.quantityButton}>+</button>
+                    <button
+                      onClick={() => increaseQuantity(item.id)}
+                      className={styles.quantityButton}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
                 {/* Tombol untuk menghapus item dari cart */}
@@ -76,16 +98,23 @@ export const Checkout: React.FC = () => {
               <p>Total Harga:</p>
               {/* Menampilkan total harga dari semua item di cart */}
               <h3>
-                Rp{" "}
+                ${' '}
                 {cart
-                  .reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0) // Menghitung total harga
-                  .toLocaleString()} {/* Format harga agar sesuai dengan format Indonesia */}
+                  .reduce(
+                    (total, item) =>
+                      total + parseFloat(item.price) * item.quantity,
+                    0
+                  ) // Menghitung total harga
+                  .toLocaleString()}{' '}
+                {/* Format harga agar sesuai dengan format Indonesia */}
               </h3>
             </div>
-
             {/* Jika form checkout belum ditampilkan, tampilkan tombol checkout */}
             {!showCheckoutForm ? (
-              <button onClick={handleCheckout} className={styles.checkoutButton}>
+              <button
+                onClick={handleCheckout}
+                className={styles.checkoutButton}
+              >
                 Checkout
               </button>
             ) : (

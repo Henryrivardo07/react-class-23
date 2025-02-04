@@ -1,8 +1,15 @@
 // hooks/useFetchProducts.ts
+
+// Import useState dan useEffect dari React untuk state dan efek samping
 import { useState, useEffect } from 'react';
+
+// Mengambil URL API dari environment variable (VITE_API_URL)
 const apiUrl = import.meta.env.VITE_API_URL;
+
+// Import axios untuk melakukan HTTP request
 import axios from 'axios';
-// Mendefinisikan tipe data untuk product
+
+// Mendefinisikan tipe data untuk product (sesuai dengan struktur API)
 interface Product {
   id: number;
   title: string;
@@ -12,58 +19,44 @@ interface Product {
   image: string;
 }
 
-// Custom hook untuk mengambil data produk
+// Custom hook untuk mengambil data produk dari API menggunakan Axios
 const useFetchProductsWithAxios = () => {
-  // State untuk menyimpan daftar produk
+  // State untuk menyimpan daftar produk yang didapat dari API
   const [products, setProducts] = useState<Product[]>([]);
-  // State untuk menyimpan status loading
+
+  // State untuk menyimpan status loading (true saat data sedang diambil)
   const [loading, setLoading] = useState<boolean>(true);
 
-  // State untuk menyimpan pesan error jika terjadi kesalahan
+  // State untuk menyimpan pesan error jika terjadi kesalahan saat fetch data
   const [error, setError] = useState<string>('');
 
   // Mengambil data produk saat komponen pertama kali dimuat
   useEffect(() => {
-    // Fungsi untuk mengambil data produk dari API
+    // Fungsi async untuk mengambil data produk dari API
     const fetchProducts = async () => {
       try {
-        // Mengambil data dari API (FakeStoreAPI)
+        // Mengambil data dari API menggunakan Axios
         const response = await axios.get(`${apiUrl}/products`);
-        // const data = await response.json(); axios otomatis ubah response json
 
-        // Menyimpan data produk yang berhasil diambil ke dalam state
+        // Menyimpan data produk ke dalam state products
         setProducts(response.data);
 
-        // Mengubah status loading menjadi false setelah data diterima
+        // Setelah data diterima, ubah status loading menjadi false
         setLoading(false);
       } catch (err) {
-        // Menangani jika terjadi error saat mengambil data
+        // Jika terjadi error, simpan pesan error dan ubah loading menjadi false
         setError('Failed to fetch products.');
         setLoading(false);
       }
     };
-    // Menjalankan fungsi fetchProducts saat pertama kali komponen dimuat
-    fetchProducts();
-  }, []); // [] sebagai dependency array, artinya hanya dijalankan sekali saat komponen pertama kali dimuat
 
-  // Mengembalikan state products, loading, dan error agar bisa digunakan oleh komponen lain
+    // Jalankan fungsi fetchProducts saat pertama kali komponen dimuat
+    fetchProducts();
+  }, []); // Dependency array kosong [] berarti useEffect hanya dijalankan sekali saat komponen pertama kali muncul
+
+  // Mengembalikan state products, loading, dan error agar bisa digunakan di komponen lain
   return { products, loading, error };
 };
 
+// Mengekspor custom hook agar bisa digunakan di komponen lain
 export default useFetchProductsWithAxios;
-
-/*
-Penjelasan Alur:
-State:
-
-products: Menyimpan data produk yang diambil dari API.
-loading: Menyimpan status apakah data sedang diambil atau tidak.
-error: Menyimpan pesan error jika terjadi kesalahan saat mengambil data.
-useEffect:
-
-Digunakan untuk menjalankan efek samping (side effect) ketika komponen pertama kali dimuat. Di sini kita memanggil API untuk mengambil data produk.
-fetchProducts: Fungsi asinkron untuk mengambil data produk dari API (https://fakestoreapi.com/products). Jika berhasil, data produk disimpan dalam state products, dan status loading diubah menjadi false. Jika gagal, error akan diset dan loading diubah menjadi false.
-Return:
-
-Custom hook ini mengembalikan tiga variabel: products, loading, dan error. Ini memungkinkan komponen yang menggunakan hook ini untuk mengakses data produk, status loading, dan pesan error jika terjadi kesalahan.
-*/
