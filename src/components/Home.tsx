@@ -20,6 +20,7 @@ import queryClient from '@/queryClient'; // Konfigurasi client query
 // Import halaman tambahan
 import PageWithPagination from '@/pages/PageWithPagination/PageWithPagination'; // Halaman dengan fitur pagination
 import ProductDetail from '@/pages/ProductDetail/ProductDetail'; // Halaman detail produk berdasarkan ID
+import { MyStore } from '@/pages/MyStore/MyStore';
 
 // Membuat komponen utama Home yang mengatur semua halaman dan state global
 export const Home: React.FC = () => {
@@ -44,6 +45,8 @@ export const Home: React.FC = () => {
               <Route path='/page-pagination' element={<PageWithPagination />} />
               {/* Jika user membuka "/products/:id", tampilkan halaman detail produk sesuai ID */}
               <Route path='/products/:id' element={<ProductDetail />} />
+              {/* HALAMAN MY STORE */}
+              <Route path='/my-store' element={<MyStore />} />
             </Routes>
           </Router>
         </SearchProvider>

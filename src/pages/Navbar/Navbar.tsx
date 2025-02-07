@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useCart } from "../../Context/cartContext"; // Mengambil data dari CartContext
-import { useSearch } from "../../Context/searchContext"; // Mengambil data dari SearchContext
-import { useNavigate } from "react-router-dom"; // Untuk navigasi ke halaman lain
-import styles from "./Navbar.module.scss";
-import TokopediaHenry from "@/assets/tokopedia.png"; // Logo yang digunakan di navbar
+import React, { useState } from 'react';
+import { useCart } from '../../Context/cartContext'; // Mengambil data dari CartContext
+import { useSearch } from '../../Context/searchContext'; // Mengambil data dari SearchContext
+import { useNavigate } from 'react-router-dom'; // Untuk navigasi ke halaman lain
+import styles from './Navbar.module.scss';
+import TokopediaHenry from '@/assets/tokopedia.png'; // Logo yang digunakan di navbar
 
 export const Navbar: React.FC = () => {
   // Mengambil data keranjang dan fungsi dari CartContext
@@ -19,9 +19,9 @@ export const Navbar: React.FC = () => {
   // Fungsi untuk mengarahkan ke halaman Checkout
   const goToCheckout = () => {
     if (cart.length > 0) {
-      navigate("/checkout"); // Navigasi ke halaman checkout jika ada item di keranjang
+      navigate('/checkout'); // Navigasi ke halaman checkout jika ada item di keranjang
     } else {
-      alert("Keranjang Anda kosong!"); // Tampilkan alert jika keranjang kosong
+      alert('Keranjang Anda kosong!'); // Tampilkan alert jika keranjang kosong
     }
   };
 
@@ -33,7 +33,7 @@ export const Navbar: React.FC = () => {
   // Fungsi untuk menangani klik tombol pencarian
   const handleSearchClick = () => {
     // Pindah ke halaman pencarian jika tombol diklik
-    navigate("/search");
+    navigate('/search');
   };
 
   return (
@@ -41,34 +41,39 @@ export const Navbar: React.FC = () => {
       <div className={styles.container}>
         {/* Logo dan nama website */}
         <div className={styles.logo}>
-          <img src={TokopediaHenry} alt="CyberShop" />
+          <img src={TokopediaHenry} alt='CyberShop' />
           <p>HENRYPEDIA</p>
         </div>
 
         {/* Kolom pencarian */}
         <div className={styles.searchBar}>
           <input
-            type="text"
-            placeholder="Search for products..."
+            type='text'
+            placeholder='Search for products...'
             value={searchQuery} // Menghubungkan input dengan nilai searchQuery
             onChange={handleSearchChange} // Update searchQuery saat input berubah
           />
-          <button onClick={handleSearchClick}>Search</button> {/* Tombol untuk memulai pencarian */}
+          <button onClick={handleSearchClick}>Search</button>{' '}
+          {/* Tombol untuk memulai pencarian */}
         </div>
 
         {/* Menu Navbar */}
         <div className={styles.menu}>
-          <a href="#home" className={styles.menuItem}>
+          <a href='/' className={styles.menuItem}>
             Home
           </a>
-          <a href="#categories" className={styles.menuItem}>
+          <a href='#categories' className={styles.menuItem}>
             Categories
+          </a>
+          <a href='/my-store' className={styles.menuItem}>
+            MyStore
           </a>
 
           {/* Ikon keranjang belanja */}
           <div className={styles.cartIcon} onClick={goToCheckout}>
             🛒
-            <span className={styles.cartCount}>{cart.length}</span> {/* Menampilkan jumlah item dalam keranjang */}
+            <span className={styles.cartCount}>{cart.length}</span>{' '}
+            {/* Menampilkan jumlah item dalam keranjang */}
           </div>
         </div>
       </div>
@@ -85,7 +90,8 @@ export const Navbar: React.FC = () => {
                 <div>
                   <p>{item.title}</p>
                   <p>
-                    1 x ${parseFloat(item.price).toFixed(2)} {/* Menampilkan harga item */}
+                    1 x ${parseFloat(item.price).toFixed(2)}{' '}
+                    {/* Menampilkan harga item */}
                   </p>
                 </div>
               </div>
@@ -96,5 +102,3 @@ export const Navbar: React.FC = () => {
     </nav>
   );
 };
-
-

@@ -49,7 +49,6 @@ const useFetchProductsWithAxios = () => {
         setLoading(false);
       }
     };
-
     // Jalankan fungsi fetchProducts saat pertama kali komponen dimuat
     fetchProducts();
   }, []); // Dependency array kosong [] berarti useEffect hanya dijalankan sekali saat komponen pertama kali muncul
