@@ -21,6 +21,7 @@ import queryClient from '@/queryClient'; // Konfigurasi client query
 import PageWithPagination from '@/pages/PageWithPagination/PageWithPagination'; // Halaman dengan fitur pagination
 import ProductDetail from '@/pages/ProductDetail/ProductDetail'; // Halaman detail produk berdasarkan ID
 import { MyStore } from '@/pages/MyStore/MyStore';
+import { MapState } from './3.stateWithMap/useMapAsState/MapState';
 
 // Membuat komponen utama Home yang mengatur semua halaman dan state global
 export const Home: React.FC = () => {
@@ -31,6 +32,7 @@ export const Home: React.FC = () => {
       <CartProvider>
         {/* Membungkus aplikasi dengan SearchProvider supaya state pencarian bisa dipakai di mana saja */}
         <SearchProvider>
+          {/* BAPAK = SEARCHPROVIDE NGASIH DUIT KE ANAKNYA */}
           {/* Router untuk mengatur navigasi di aplikasi */}
           <Router>
             {/* Daftar route (jalur navigasi) dalam aplikasi */}
@@ -47,6 +49,7 @@ export const Home: React.FC = () => {
               <Route path='/products/:id' element={<ProductDetail />} />
               {/* HALAMAN MY STORE */}
               <Route path='/my-store' element={<MyStore />} />
+              <Route path='/test' element={<MapState />} />
             </Routes>
           </Router>
         </SearchProvider>

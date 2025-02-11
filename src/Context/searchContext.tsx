@@ -39,7 +39,6 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   );
 };
 
-
 /*
 Penjelasan Alur:
 SearchContextType: Ini adalah tipe untuk context yang kita buat. Di sini, ada dua properti:

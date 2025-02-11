@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react'; // Import React dan useCallback
 import styles from './HomePage.module.scss'; // Import styling SCSS untuk halaman utama
 import { ProductCard } from '@/components/ui/CardProduct/CardProduct'; // Import komponen untuk menampilkan produk
-import { Navbar } from '../Navbar/Navbar'; // Import komponen Navbar
+
 import useFetchProducts from '@/hooks/useFetchProducts'; // Hook untuk mengambil data produk
-import { useCart } from '../../Context/cartContext'; // Mengakses konteks cart untuk mendapatkan fungsi menambah produk ke keranjang
+import { useCart } from '@/Context/cartContext';
 import { toast, ToastContainer } from 'react-toastify'; // Import toast untuk notifikasi
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS untuk toast notifications
+import { Navbar } from '../Navbar/Navbar';
 
 export const Homepage: React.FC = () => {
   // Mengambil data produk dan status loading/error dari hook useFetchProducts

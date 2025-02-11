@@ -6,7 +6,7 @@ import styles from './PageWithPagination.module.scss'; // Import SCSS module unt
 const PageWithPagination: React.FC = () => {
   // State untuk menyimpan halaman saat ini
   const [page, setPage] = useState(1);
-  const limit = 10; // Jumlah item yang ditampilkan per halaman
+  const limit = 5; // Jumlah item yang ditampilkan per halaman
 
   // Memanggil custom hook untuk mengambil data produk berdasarkan halaman
   const { products, loading, error } = useFetchProductsWithPagination(

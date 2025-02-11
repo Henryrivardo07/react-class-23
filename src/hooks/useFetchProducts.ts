@@ -1,13 +1,13 @@
 // hooks/useFetchProducts.ts
 
 // Import useState dan useEffect dari React untuk state dan efek samping
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 // Mengambil URL API dari environment variable (VITE_API_URL)
 const apiUrl = import.meta.env.VITE_API_URL;
 
 // Import axios untuk melakukan HTTP request
-import axios from 'axios';
 
 // Mendefinisikan tipe data untuk product (sesuai dengan struktur API)
 interface Product {

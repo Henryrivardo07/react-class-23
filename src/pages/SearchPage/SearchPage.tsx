@@ -22,7 +22,7 @@ export const SearchPage: React.FC = () => {
   const { cart, addToCart } = useCart(); // Mengambil data keranjang dan fungsi untuk menambah produk ke keranjang
   const [products, setProducts] = useState<Product[]>([]); // State untuk menyimpan produk yang diambil dari API
   const location = useLocation(); // Mengambil informasi URL saat ini
-  const { searchQuery } = useSearch(); // Mengambil query pencarian yang ada di Context
+  const { searchQuery } = useSearch(); // Mengambil query pencarian yang ada di Context "mens cotton sesuai url"
 
   // Mengambil query parameter dari URL (contoh: ?query=iphone)
   const queryParams = new URLSearchParams(location.search); // Mengambil parameter query dari URL
@@ -38,8 +38,8 @@ export const SearchPage: React.FC = () => {
   }, []); // Efek ini hanya dijalankan sekali saat komponen pertama kali dipasang
 
   // Filter produk berdasarkan query pencarian
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(query.toLowerCase()) // Menyaring produk yang judulnya mengandung query pencarian
+  const filteredProducts = products.filter(
+    (product) => product.title.toLowerCase().includes(query.toLowerCase()) // Menyaring produk yang judulnya mengandung query pencarian
   );
 
   // Render halaman pencarian
@@ -47,11 +47,13 @@ export const SearchPage: React.FC = () => {
     <div className={styles.searchPage}>
       <header className={styles.header}>
         <h1>Search Results</h1> {/* Judul halaman */}
-        <p>Showing results for: "{query}"</p> {/* Menampilkan kata kunci yang sedang dicari */}
+        <p>Showing results for: "{query}"</p>{' '}
+        {/* Menampilkan kata kunci yang sedang dicari */}
       </header>
 
       <main className={styles.mainContent}>
-        <h2 className={styles.sectionTitle}>Products</h2> {/* Judul bagian produk */}
+        <h2 className={styles.sectionTitle}>Products</h2>{' '}
+        {/* Judul bagian produk */}
         <div className={styles.productsGrid}>
           {/* Jika ada produk yang cocok dengan query pencarian */}
           {filteredProducts.length > 0 ? (
